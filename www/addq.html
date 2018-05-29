@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="author" content="Ranielle Canlas">
+        <title>Quiz Me Master</title>
+        <style>
+            #loader{
+                position:absolute;
+                z-index: 99;
+                top:0;
+                left:0;
+                height:100vh;
+                width:100vw;
+                background: RGBA(50,50,50,0.5);
+            }
+        </style>
+    </head> 
+    <body>
+        <nav class="blue">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo center">Quiz Me!</a>
+                <ul class="right green">
+                    <li><a id="send" href="#"><i class="material-icons">send</i></a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <br>
+            <div class="row">
+            <form class="col s12">
+                <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="question" class="materialize-textarea"></textarea>
+                    <label for="question">Question</label>
+                </div>
+                </div>
+
+                <div class="input-field col s12">
+                <select id="qtype">
+                    <option value="" disabled selected>Question Type</option>
+                    <option value="1">Multiple Choice</option>
+                    <option value="2">Identification</option>
+                    <option value="3">True or False</option>
+                    <option value="4">Enumeration</option>
+                </select>
+                <label>Materialize Select</label>
+                </div>
+            </form>
+            </div>
+            <div id="ans">
+                
+            </div>
+        </div>
+
+        <div id="loader" class="valign-wrapper">
+            <div class="preloader-wrapper big active" style="margin: auto auto;">
+                <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                <div class="circle"></div>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+        <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+        crossorigin="anonymous"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+        <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBILmF0Swlx60yqGwt3sxqbDGw07Tol1Uk",
+            authDomain: "quizmemaster-7245f.firebaseapp.com",
+            databaseURL: "https://quizmemaster-7245f.firebaseio.com",
+            projectId: "quizmemaster-7245f",
+            storageBucket: "quizmemaster-7245f.appspot.com",
+            messagingSenderId: "477024496345"
+        };
+        firebase.initializeApp(config);
+        </script>
+
+    </body>
+</html>
