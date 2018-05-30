@@ -159,7 +159,9 @@ $(document).ready(function(){
 	});
 	
 	$("#close").click(function(){
-		
+		$("#score").text("Quiz Me!");
+		$("#main").html("<h5>You finished the review!</h5>" + 
+		"Final Score: " + score + " / " + qCount);
 	});
 	
 });
