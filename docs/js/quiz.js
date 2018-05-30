@@ -80,7 +80,7 @@ $(document).ready(function(){
                 $("#ans .collection a").click(function(){
                     $("#ans .collection a").removeClass("active");
                     $(this).addClass("active");
-                    answer = $("#ans .collection a:active").text();
+                    answer = $("#ans .collection a.active").text();
 					console.log("You selected: " + answer);
                 });
             break;
