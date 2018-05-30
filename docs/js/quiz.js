@@ -137,7 +137,7 @@ $(document).ready(function(){
 				score++;
 				alert("Correct!");
 			}else{
-				alert("Wrong!");
+				alert("Wrong!, the correct answer is: " + current["correct"]);
 			}
 		}
 		
