@@ -35,10 +35,11 @@ $(document).ready(function(){
 	
 	function setQuestion(index){
 		$("#qid").text("#" + (qId+1));
+		answer="";
 		current=questions[qId].question;
 		$("#question").text(current["question"]);
 		var qtype = current["type"];
-		
+		console.log("Key: " + questions[qId].key);
 		console.log(current);
 		console.log(qtype);
 		
@@ -47,6 +48,7 @@ $(document).ready(function(){
                 $("#ans").html("<div class='collection'></div>");
 				
 				var choices = current["choices"].split(",");
+				choices.sort(function(a, b){return 0.5 - Math.random()});
 				console.log(choices);
 				
 				for(var i=0; i<choices.length; i++){
@@ -88,7 +90,7 @@ $(document).ready(function(){
                 $("#ans").html("<div class='collection'>"+
                 "</div>" + 
                 "<a id='addans' class='waves-effect waves-light btn blue'>Add answer(s)<i class='material-icons right'>send</i></a><br><br>");
-
+				answer="[enum]:";
                 $("#addans").click(function(){
                     var ans = prompt("Add Answer: ");
                     if(ans!=""){
@@ -126,10 +128,38 @@ $(document).ready(function(){
 			for(var i=0; i<correctAnswers.length; i++){
 				qCount++;
 				var item = correctAnswers[i];
-				console.log("Checking: " + item.toUpperCase() + " from (" + answer.toUpperCase() + ")");
-				if(answer.includes(item)){
-					score++;
+				item = item.split(" ").join(""); //removes all spaces
+				answer = answer.split(" ").join("");
+				
+				if(item.includes("[or]")){
+					item = item.split("[or]");
+					var found=0;
+					for(var j=0; j<item.length;j++){
+						console.log("Checking: " + item[j].toUpperCase() + " from (" + answer.toUpperCase() + ")");
+						if(answer.toUpperCase().includes(item[j].toUpperCase())){
+							found=1;
+							console.log("found ++");
+						}
+					}
+					
+					if(found==1){
+						console.log("FOUND: Score+1");
+						score++;
+					}else{
+						console.log(found+"NOT FOUND!");
+					}
+					
+				}else{
+					console.log("Checking: " + item.toUpperCase() + " from (" + answer.toUpperCase() + ")");
+					if(answer.toUpperCase().includes(item.toUpperCase())){
+						console.log("FOUND: Score+1");
+						score++;
+					}else{
+						console.log("NOT FOUND!");
+					}
 				}
+				
+				
 			}
 		}else{
 			qCount++;
@@ -152,16 +182,28 @@ $(document).ready(function(){
 		}else{
 			//Post Score
 			$("#score").text("Quiz Me!");
-			$("#main").html("<h5>You finished the review!</h5>" + 
-			"Final Score: " + score + " / " + qCount);
-			//View Leaderboard
+			equiv = 0;
+			score+=10;
+			qCount+=10;
+			equiv = (score / qCount) * 75 + 25;
+			$("#main").html("<h5>You finished the review!</h5>" +
+			"<h6>+10 Bonus points!</h6>" +
+			"<b>Final Score: </b>" + score + " / " + qCount);
+			$("#main").append("<br><b>Equivalent: </b>" + equiv + "<br><hr><br>" + 
+			"<b>Equiv </b> = (Score / QuestionCount) * 75 + 25<br><hr><br>" + 
+			"<a id='retake' href='index.html' class='waves-effect waves-light btn blue'>Retake Quiz Reviewer<i class='material-icons right'>refresh</i></a>");
 		}
 	});
 	
 	$("#close").click(function(){
 		$("#score").text("Quiz Me!");
-		$("#main").html("<h5>You finished the review!</h5>" + 
-		"Final Score: " + score + " / " + qCount);
+		equiv = 0;
+		equiv = (score / qCount) * 75 + 25;
+		$("#main").html("<h5>Your final score!</h5>" + 
+		"<b>Final Score: </b>" + score + " / " + qCount);
+		$("#main").append("<br><b>Equivalent: </b>" + equiv + "<br><hr><br>" + 
+		"<b>Equiv </b> = (Score / QuestionCount) * 75 + 25<br><hr><br>" + 
+		"<a id='retake' href='index.html' class='waves-effect waves-light btn blue'>Retake Quiz Reviewer<i class='material-icons right'>refresh</i></a>");
 	});
 	
 });
