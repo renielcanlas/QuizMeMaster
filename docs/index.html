@@ -6,39 +6,72 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta name="author" content="Ranielle Canlas">
         <title>Quiz Me Master</title>
+		<style>
+            #loader{
+                position:absolute;
+                z-index: 99;
+                top:0;
+                left:0;
+                height:100vh;
+                width:100vw;
+                background: RGBA(50,50,50,0.5);
+            }
+        </style>
     </head> 
     <body>
+		<div class="navbar-fixed">
         <nav class="blue">
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo center">Quiz Me!</a>
+                <a href="#" id="score" class="brand-logo center">Quiz Me!</a>
                 <ul class="right red">
                     <li><a id="close" href="#"><i class="material-icons">close</i></a></li>
                 </ul>
             </div>
         </nav>
-        <div class="container">
+		</div>
+        <div id="main" class="container">
             <h5 id="qid">#ID</h5>
-            <p id="question">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam efficitur massa vitae arcu ornare lacinia. Cras in facilisis leo. Morbi condimentum, neque vel dapibus egestas, sapien mi tincidunt dolor, ut porta justo justo eu massa.
-            </p>
-            <div id="ans">
-                <div class="collection">
-                    <a href="#" class="collection-item">Choice A</a>
-                    <a href="#" class="collection-item">Choice B</a>
-                    <a href="#" class="collection-item">Choice C</a>
-                    <a href="#" class="collection-item">Choice D</a>
-                </div>
-            </div>
+            <p id="question"></p>
+            <div id="ans"></div>
 
             <a id="submit" class="waves-effect waves-light btn blue">Submit
                 <i class="material-icons right">send</i>
             </a>
         </div>
+		
+		<div id="loader" class="valign-wrapper">
+            <div class="preloader-wrapper big active" style="margin: auto auto;">
+                <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                <div class="circle"></div>
+                </div>
+                </div>
+            </div>
+        </div>
+		
         <script
         src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
         crossorigin="anonymous"></script>
-        <script type="text/javascript" src="js/script.js"></script>
+        <script type="text/javascript" src="js/quiz.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+        <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBILmF0Swlx60yqGwt3sxqbDGw07Tol1Uk",
+            authDomain: "quizmemaster-7245f.firebaseapp.com",
+            databaseURL: "https://quizmemaster-7245f.firebaseio.com",
+            projectId: "quizmemaster-7245f",
+            storageBucket: "quizmemaster-7245f.appspot.com",
+            messagingSenderId: "477024496345"
+        };
+        firebase.initializeApp(config);
+        </script>
     </body>
 </html>
