@@ -33,6 +33,7 @@ $(document).ready(function(){
 
                     $("#ans .collection a").removeClass("active");
                     $("#ans .collection a").click(function(){
+						$("#ans .collection a").removeClass("active");
                         $(this).addClass("active");
                         ca = $("#ans .collection a:active").text();
                         console.log("Correct: " + ca);
@@ -59,6 +60,7 @@ $(document).ready(function(){
                     $("#ans .collection a").removeClass("active");
                     $(this).addClass("active");
                     ca = $("#ans .collection a:active").text();
+					console.log("Correct: " + ca);
                 });
             break;
             case "Enumeration":
